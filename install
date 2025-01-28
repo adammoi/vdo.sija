@@ -1,0 +1,34 @@
+### Update
+sudo apt-get update
+sudo apt-get upgrade -y
+
+### Install dependencies
+sudo apt-get install git -y
+sudo apt-get install nodejs -y
+sudo apt-get install npm -y
+sudo apt-get install vim -y
+sudo apt-get install net-tools -y
+sudo apt-get install tmux -y
+
+### Install vdo.ninja 
+git clone https://github.com/steveseguin/vdo.ninja
+
+## configure vdo.ninja for local hss server
+sed -i 's/\/\/ session\.customWSS = true;/session\.wss = "wss:\/\/"+window\.location\.hostname+":8443";session\.customWSS = true;/' ./vdo.ninja/index.html
+
+### Install websocket server
+git clone https://github.com/steveseguin/offline_deployment
+mv offline_deployment webserver
+cd webserver
+
+## create a service and start the server
+sudo cp vdoninja.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable vdoninja
+sudo systemctl restart vdoninja
+
+## or start our server directly ..
+sudo nodejs server.js
+
+## show IP addresses
+ifconfig 
