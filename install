@@ -20,8 +20,14 @@ sed -i 's/\/\/ session\.customWSS = true;/session\.wss = "wss:\/\/"+window\.loca
 git clone https://github.com/steveseguin/offline_deployment
 mv offline_deployment webserver
 cd webserver
+npm install
 
-## create a service and start the server
+## edit dulu ssl, baru lanjut service
+
+## create a service and start the serve
+## edit vdoninja.service dulu, ubah direktori home
+
+nano vdoninja.service
 sudo cp vdoninja.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable vdoninja
